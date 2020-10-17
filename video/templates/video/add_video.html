@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}BEATSPOT: DODAJ VIDEO{% endblock %}
+
+{% block body %}
+
+DODAJ VIDEO <br><br>
+
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{form.as_p}}
+        {{ form.media | safe }}
+        <button type="submit" class="btn btn-outline-primary">DODAJ VIDEO</button>
+    </form>
+
+{% endblock %}

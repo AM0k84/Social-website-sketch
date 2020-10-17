@@ -1,0 +1,46 @@
+{% if user.is_authenticated %}
+
+    Witaj <a href="{% url 'profile' user.username %}">{{ user.username }} </a>
+    <a href="{% url "edit_profile" user.slug  %}">EDYCJA PROFILU</a>
+    <a href="{% url "user:change_password" %}">ZMIANA HASŁA</a>
+    <a href="{% url "user:logout" %}">WYLOGUJ</a> <br>
+
+    <a href="{% url 'news:add_article' %}"> DODAJ NEWS </a>
+    <a href="{% url 'video:add_video' %}"> DODAJ VIDEO </a> <br>
+
+
+    <a href="{% url 'index' %}">HOME</a><br>
+
+    <a href="{% url 'news:all_articles_list' %}">NEWSY</a>
+    <a href="{% url 'news:most_popular_articles' %}">POPULARNE NEWSY</a>
+    <a href="{% url 'news:promoted_articles' %}">PROMOWANE NEWSY</a>
+    <a href="{% url 'news:most_popular_promoted_articles' %}">POPULARNE PROMOWANE NEWSY</a><br>
+
+
+    <a href="{% url 'video:all_videos_list' %}">VIDEO</a>
+    <a href="{% url 'video:most_popular_videos' %}">POPULARNE VIDEO</a>
+
+
+
+
+
+{% else %}
+
+    <a href="{% url "user:login" %}">ZALOGUJ</a>
+    <a href="{% url "user:register" %}">REJESTRUJ</a><br>
+
+    <a href="{% url 'index' %}">HOME</a><br>
+
+    <a href="{% url 'news:all_articles_list' %}">NEWSY</a>
+    <a href="{% url 'news:most_popular_articles' %}">POPULARNE NEWSY</a>
+    <a href="{% url 'news:all_articles_list' %}">NEWSY</a>
+    <a href="{% url 'news:most_popular_articles' %}">POPULARNE NEWSY</a>
+    <a href="{% url 'news:promoted_articles' %}">PROMOWANE NEWSY</a>
+    <a href="{% url 'news:most_popular_promoted_articles' %}">POPULARNE PROMOWANE NEWSY</a><br>
+
+    <a href="{% url 'video:all_videos_list' %}">VIDEO</a>
+    <a href="{% url 'video:most_popular_videos' %}">POPULARNE VIDEO</a>
+
+{% endif %}
+
+<br><br>

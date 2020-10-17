@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{#{% load crispy_forms_tags %}#}
+
+{% block title %}BEATSPOT: DODAJ NEWS{% endblock %}
+
+{% block body %}
+
+DODAJ NEWS <br><br>
+
+
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{form.as_p}}
+        {{ form.media | safe }}
+    <button type="submit" class="btn btn-outline-primary">DODAJ NEWS</button>
+    </form>
+
+
+{% endblock %}

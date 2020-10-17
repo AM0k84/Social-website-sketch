@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} BEATSPOT: USUŃ {{ video.video_title | upper }} {% endblock %}
+
+
+{% block body %}
+
+    USUŃ NEWSA: {{ video.video_title | upper }} <hr>
+
+
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        CHCESZ USUĄĆ: {{ video.video_title }} <br>
+        CZY JESTEŚ PEWIEN? <br>
+{#    <input type="submit" value="USUŃ" name="submit" alt="USUŃ" />#}
+    <button type="submit" class="btn btn-outline-danger">USUŃ</button>
+    <a class="btn btn-outline-secondary" href="{% url 'video:video_detail' pk=video.pk slug=video.slug %}">ANULUJ </a>
+    </form>
+
+{% endblock %}

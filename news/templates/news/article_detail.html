@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block title %} BEATSPOT: {{ article.title | upper }}  {% endblock %}
+
+
+{% block body %}
+
+
+    {#    ARTYKUŁ#}
+
+    PODGLĄD ARTYKUŁU <br><br>
+
+
+    {% if article.image %}
+        <img src="{{ article.image.url }}">
+    {% else %}
+        BRAK OBRAZKA
+    {% endif %}
+    <br>
+
+
+    {#ID_artykułu: {{ article.id }} <br>#}
+    Tytuł: {{ article.title | upper }} <br>
+    {% if user.id == article.author.id %}
+        <small>
+            <a class="btn btn-outline-primary btn-sm" role="button"
+               href="{% url 'news:update_article' pk=article.pk slug=article.slug %}"><i
+                    class="far fa-edit"></i></a>
+            <a class="btn btn-outline-primary btn-sm" role="button"
+               href="{% url 'news:delete_article' pk=article.pk slug=article.slug %}"><i
+                    class="far fa-trash-alt"></i></a> <br>
+        </small>
+    {% endif %}
+
+    {#KATEGORIA_iterator:#}
+    {% for category in article.category.iterator %}
+        <a class="badge badge-pill badge-secondary"
+           href="{% url 'news:category_articles_list' category.slug %}">    {{ category | upper }} </a>
+    {% endfor %} <br>
+    {#KATEGORIA_string: {{ article.article_categories }} <br>#}
+
+
+    Data dodania: {{ article.created_on.date }} <br>
+    Godzina dodania: {{ article.created_on.time }} <br>
+    Wyświetlenia (w sumie): {{ hitcount.total_hits }} <br>
+    Wyświetlenia (ostatnie 10 minut): {% get_hit_count for article within "minutes=10" %} <br>
+
+
+
+    TREŚĆ: {{ article.body | safe }} <br>
+    LINK: <a href="{% url 'news:article_detail' pk=article.pk slug=article.slug %}">
+    {% url 'news:article_detail' pk=article.pk slug=article.slug %}</a> <br><br>
+
+
+
+    {% if article.author.photo %}
+        <img style="height:170px; width:170px; margin:auto"
+             src="{{ article.author.photo.url }}" alt="Photo">
+    {% else %}
+        <img style="height:170px; width:170px; margin:auto"
+             src="{% static 'images/default_photo.png' %}" alt="Photo">
+    {% endif %}
+    <br>
+    Autor: <a href="{% url 'profile' article.author %}"> {{ article.author }} </a> <br>
+    <a class="btn btn-outline-primary btn-sm" role="button"
+       href="{{ article.author.website_url }}"> <i class="fas fa-house-user"></i> </a>
+    <a class="btn btn-outline-primary  btn-sm" role="button"
+       href="{{ article.author.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
+    <a class="btn btn-outline-primary  btn-sm" role="button"
+       href="{{ article.author.instagram_url }}"> <i class="fab fa-instagram"></i> </a>
+    <a class="btn btn-outline-primary  btn-sm" role="button"
+       href="{{ article.author.soundcloud_url }}"> <i class="fab fa-soundcloud"></i> </a>
+
+<br>
+    {{ article.author.bio }}
+
+
+
+    {#AUTORA MOŻNA RÓWNIEŻ ZAPISAĆ TAK: {{ article.author.username }} #}
+<br><br>
+
+    {#    KOMENTARZE#}
+
+    DODAJ KOMENTARZ <br>
+
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-primary">DODAJ KOMENTARZ</button>
+        </form>
+    {% else %}
+        <a href="{% url 'user:login' %}"> Zaloguj </a> sie aby dodać komentarz <br>
+    {% endif %}
+    <hr>
+
+
+    {% if not article.comments.all %}
+        Brak komentarzy <br>
+    {% else %}
+        ILOŚĆ KOMENTARZY: {{ comments_number }} (bedzie wyswietlalo tylko 2 bo tak jest paginacja ustawiona)<br> <br>
+    {% endif %}
+
+    {% for comment in comments %}
+        <a href="{% url 'profile' article.author %}">
+            {% if comment.author.photo %}
+                <img style="height:70px; width:70px; border-radius:50%; margin:auto"
+                     src="{{ comment.author.photo.url }}" alt="Photo">
+            {% else %}
+                <img style="height:70px; width:70px; border-radius:50%; margin:auto"
+                     src="{% static 'images/default_photo.png' %}" alt="Photo">
+            {% endif %} </a> <br>
+
+        Skomentował: <a href="{% url 'profile' comment.author %}"> {{ comment.author }} </a> <br>
+        Dnia: {{ comment.created_on }}<br>
+        Tytuł: {{ comment.title }} <br>
+        Treść: {{ comment.body }} <br> <br>
+    {% endfor %}
+
+    {# Inny sposób na dodanie komentarzy:   #}
+    {#    {% if not article.comments.all %}#}
+    {#    Brak komentarzy <br>#}
+    {#{% else %}#}
+    {#    {% with article.comments.count as total_comments %}#}
+    {#    Ilość wszystkich komentarzy: {{ total_comments }}#}
+    {#    {% endwith %}#}
+    {#<br><br>#}
+    {##}
+    {#{% for comment in article.comments.all %}#}
+    {#    Skomentował: <a href="{% url 'profile' comment.author %}"> {{ comment.author }} </a> <br>#}
+    {#    Dnia: {{ comment.created_on }}<br>#}
+    {#    Tytuł: {{ comment.title }} <br>#}
+    {#    Treść: {{ comment.body  }} <br> <br>#}
+    {#    MOŻNA TEŻ SPRÓBOWAĆ Z LINEBREAKS#}
+    {#    Treść: {{ comment.body | linebreaks }}#}
+    {#{% endfor %}#}
+    {#{% endif %}#}
+
+    {% if comments.paginator %}
+        {% if comments.has_previous %}
+            <a href="?page={{ comments.previous_page_number }}">&laquo; NOWSZE KOMENTARZE </a>
+            Strona komentarzy {{ comments.number }} z {{ comments.paginator.num_pages }}.
+
+        {% endif %}
+
+        {% if comments.has_next %}
+            Strona komentarzy {{ comments.number }} z {{ comments.paginator.num_pages }}.
+            <a href="?page={{ comments.next_page_number }}"> STARSZE KOMENTARZE &raquo;</a>
+        {% endif %}
+    {% endif %}
+    <br> <br>
+
+
+    <a href="{% url 'news:all_articles_list' %}"> &laquo; POWRÓT DO WSZYSTKICH NEWSÓW</a>
+
+{% endblock %}

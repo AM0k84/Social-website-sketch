@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} BEATSPOT: ZAKTUALIZUJ {{ article.title }} {% endblock %}
+
+
+{% block body %}
+
+    EDYTUJ {{ article.title }} <br><br>
+
+    {#W widoku nie używam mixina do sprawdzenia czy user, który usuwa newsa jest jego właścicielem#}
+    {#więc muszę to zrobić tutaj.#}
+    {% if user.id == article.author.id %}
+        <form method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+            {{form.as_p}}
+            {{ form.media | safe }}
+        <button type="submit" class="btn btn-outline-primary">ZAPISZ ZMIANY</button>
+        </form>
+    {% else %}
+        NIE MOŻESZ EDYTOWA TEGO NEWSA!
+    {% endif %}
+
+{% endblock %}

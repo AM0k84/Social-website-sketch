@@ -1,0 +1,14 @@
+{##todo:#}
+{###DOROBIĆ WIADOMOŚCI#}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == "error" %} danger {% else %}{{ message.tags }}
+
+{% endif %}">
+            {% autoescape off %}
+                {{ message }}
+            {% endautoescape %}
+        </div>
+    {% endfor %}
+{% endif %}
