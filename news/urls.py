@@ -14,9 +14,9 @@ urlpatterns = [
 
     path('category/<slug:slug>/', CategoryArticlesList.as_view(), name='category_articles_list'),
     path('all/', AllArticlesListView.as_view(), name='all_articles_list'),
-    path('most_popular/', MostPopularArticlesListView.as_view(), name='most_popular_articles'),
+    path('trending/', MostPopularArticlesListView.as_view(), name='trending'),
 
     path('promoted/', PromotedArticlesView.as_view(), name='promoted_articles'),
-    path('promoted/most_popular', MostPopularPromotedArticlesView.as_view(), name='most_popular_promoted_articles'),
+    path('hot/', MostPopularPromotedArticlesView.as_view(), name='hot_promoted_articles'),
 
 ]

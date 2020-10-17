@@ -42,6 +42,7 @@ class Article(Created, HitCountMixin):
     # todo: USTAWIĆ OD DELETE W CATEGORY I ZMIENIĆ RELATED NAME
     category = models.ManyToManyField(ArticleCategory, related_name='articles')
     image = models.ImageField(blank=True, null=True, upload_to='article_image/')
+    is_promoted = models.BooleanField(default=False)
     slug = models.SlugField(null=False, unique=False)
 
     # TUTAJ TWORZĘ POWIĄZANIE OBIEKTU ABY MÓC W WIDOKACH W QUERY SORTOWAĆ PO WYŚWIETLENIACH

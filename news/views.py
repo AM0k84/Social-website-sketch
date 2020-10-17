@@ -122,7 +122,7 @@ class CategoryArticlesList(ListView):
     def articlecategory(self):
         return get_object_or_404(ArticleCategory, slug=self.kwargs['slug'])
 
-
+#wszystkie
 class AllArticlesListView(ListView):
     template_name = 'news/articles_list.html'
     model = Article
@@ -131,12 +131,13 @@ class AllArticlesListView(ListView):
     def get_queryset(self):
         return self.model.objects.all().order_by('-pk')
 
-
+#wszystkie popularne niepromowane
 # NA CHWILĘ OBECNĄ POKAZUJĘ WSZYSTKIE POPULARNE Z OSTATNICH MINUT (NAJWIĘCEJ WYŚWIETLEŃ W OSTANIE 10 MIN)
 # todo: ZROBIĆ NAJPOPULARNIEJSZE Z 24H, TYGODNIA, MIESIĄCA
 class MostPopularArticlesListView(ListView):
     template_name = 'news/trending_articles.html'
     model = Article
+
 
     # TO QUERY POKAZUJE NAM LISTE NEWSÓW Z NAJWIĘKSZĄ ILOŚCIĄ WYŚWIETLEŃ Z OSTATNICH 10 MIN
     # MAXYMALNIE 20 NEWSÓW
@@ -146,14 +147,14 @@ class MostPopularArticlesListView(ListView):
             hit_count_generic__hit__created__gte=period
         ).annotate(
             counts=models.Count('hit_count_generic__hit')
-        ).order_by('-counts')[:20]
+        ).order_by('-counts').filter(is_promoted=False)[:20]
 
 # todo: DOROBIĆ INNE WIDOKI, NP TU SA WSZYSTKIE NEWSY POSORTOWANE OD NAJWIEKSZEJ ILOSCY WYSWIETLEN
 # def get_queryset(self):
 #     return self.model.objects.all().order_by('-hit_count_generic__hits')
 
 
-
+#wszystkie promowane
 class PromotedArticlesView(ListView):
     model = Article
     template_name = 'news/promoted_articles.html'
@@ -162,5 +163,16 @@ class PromotedArticlesView(ListView):
     def get_queryset(self):
         return self.model.objects.all().order_by('-pk').filter(is_promoted=True)
 
+#kozaki
+#todo: W PRZYSZŁOŚCI BARDZIEJ SKOMPLIKOWANY FILTER HOT NEWSÓW
 class MostPopularPromotedArticlesView(ListView):
-    pass
+    model = Article
+    template_name = 'news/hot_articles.html'
+
+    def get_queryset(self):
+        period = datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(minutes=10)
+        return self.model.objects.filter(
+            hit_count_generic__hit__created__gte=period
+        ).annotate(
+            counts=models.Count('hit_count_generic__hit')
+        ).order_by('-counts').filter(is_promoted=True)[:20]
