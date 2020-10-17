@@ -144,3 +144,28 @@ class MostPopularVideosListView(ListView):
         ).annotate(
             counts=models.Count('hit_count_generic__hit')
         ).order_by('-counts')[:20]
+
+
+#wszystkie promowane
+class PromotedVideosView(ListView):
+    model = Video
+    template_name = 'video/promoted_videos.html'
+    paginate_by = 5
+
+    def get_queryset(self):
+        return self.model.objects.all().order_by('-pk').filter(is_promoted=True)
+
+
+#kozaki
+#todo: W PRZYSZŁOŚCI BARDZIEJ SKOMPLIKOWANY FILTER HOT NEWSÓW
+class MostPopularPromotedVideosView(ListView):
+    model = Video
+    template_name = 'video/hot_videos.html'
+
+    def get_queryset(self):
+        period = datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(minutes=10)
+        return self.model.objects.filter(
+            hit_count_generic__hit__created__gte=period
+        ).annotate(
+            counts=models.Count('hit_count_generic__hit')
+        ).order_by('-counts').filter(is_promoted=True)[:20]

@@ -47,6 +47,7 @@ class Video(Base, HitCountMixin):
     snippet = models.TextField()
     body = RichTextField(null=False)
     youtube_video = EmbedVideoField(blank=True)
+    is_promoted = models.BooleanField(default=False)
     slug = models.SlugField(null=False, unique=False)
 
     def save(self, *args, **kwargs):

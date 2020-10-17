@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load embed_video_tags %}
+
+{% block title %} BEATSPOT: HOT VIDEO {% endblock %}
+
+
+{% block body %}
+
+    HOT VIDEO <br> <br>
+
+    {% if object_list %}
+        {% for videos in object_list %}
+
+
+
+            {% video videos.youtube_video 'medium' %} <br>
+            Tytuł: <a href="{{ videos.get_absolute_url }}"> {{ videos.video_title|upper }} </a> <br>
+            {% if user.id == videos.author.id %}
+                <small>
+                    <a class="btn btn-outline-primary btn-sm" role="button"
+                       href="{% url 'video:update_video' pk=videos.pk slug=videos.slug %}"><i
+                            class="far fa-edit"></i></a>
+                    <a class="btn btn-outline-primary btn-sm" role="button"
+                       href="{% url 'video:delete_video' pk=videos.pk slug=videos.slug %}"><i
+                            class="far fa-trash-alt"></i></a> <br>
+                </small>
+            {% endif %}
+            KATEGORIA:
+            {% for category in videos.category.iterator %}
+                <a class="badge badge-pill badge-secondary"
+                   href="{% url 'video:category_videos_list'  category.slug %}">    {{ category | upper }} </a>
+            {% endfor %} <br>
+            AUTOR: <a href="{% url 'profile' videos.author %}">{{ videos.author }} </a><br>
+
+            SNIPPET:
+            {{ videos.snippet }} <a href="{{ videos.get_absolute_url }}"> zobacz więcej >>> </a> <br><br><br>
+        {% endfor %}
+    {% else %}
+        <p>Brak video.</p>
+    {% endif %}
+
+
+
+    {#PAGINACJA#}
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo; POPRZEDNIA </a>
+        {% endif %}
+        Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> NASTĘPNA &raquo;</a>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+
+
+
+
+
+

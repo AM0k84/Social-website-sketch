@@ -5,7 +5,7 @@ from video.models import Video, VideoCategory, VideoComment
 
 
 class VideoAdmin(AdminVideoMixin, admin.ModelAdmin):
-    list_display = ('id', 'video_title', 'author', 'created_on', 'slug')  # todo: DODAĆ LISTE KATEGORII JAKO STRING
+    list_display = ('id', 'video_title', 'author', 'created_on', 'is_promoted', 'slug')  # todo: DODAĆ LISTE KATEGORII JAKO STRING
     prepopulated_fields = {'slug': ('video_title', )}
 
 
