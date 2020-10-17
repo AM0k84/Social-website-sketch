@@ -63,16 +63,24 @@
              src="{% static 'images/default_photo.png' %}" alt="Photo">
     {% endif %}
     <br>
+
     Autor: <a href="{% url 'profile' article.author %}"> {{ article.author }} </a> <br>
+    {% if article.author.website_url %}
     <a class="btn btn-outline-primary btn-sm" role="button"
        href="{{ article.author.website_url }}"> <i class="fas fa-house-user"></i> </a>
+    {% endif %}
+    {% if article.author.facebook_url %}
     <a class="btn btn-outline-primary  btn-sm" role="button"
        href="{{ article.author.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
+    {% endif %}
+    {% if article.author.instagram_url %}
     <a class="btn btn-outline-primary  btn-sm" role="button"
        href="{{ article.author.instagram_url }}"> <i class="fab fa-instagram"></i> </a>
+    {% endif %}
+    {% if article.author.soundcloud_url %}
     <a class="btn btn-outline-primary  btn-sm" role="button"
        href="{{ article.author.soundcloud_url }}"> <i class="fab fa-soundcloud"></i> </a>
-
+    {% endif %}
 <br>
     {{ article.author.bio }}
 

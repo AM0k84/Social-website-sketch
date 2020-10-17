@@ -1,6 +1,7 @@
 from django.urls import path
 from news.views import AllArticlesListView, AddArticle, ArticleDetailView, CategoryArticlesList, ArticleDeleteView, \
-    UpdateArticleView, MostPopularArticlesListView, PromotedArticlesView, MostPopularPromotedArticlesView
+    UpdateArticleView, MostPopularArticlesListView, PromotedArticlesView, MostPopularPromotedArticlesView, \
+    ArticlesIndexView
 
 app_name = 'news'
 
@@ -9,6 +10,8 @@ urlpatterns = [
     path('add/', AddArticle.as_view(), name='add_article'),
     path('edit/<int:pk>/<slug:slug>', UpdateArticleView.as_view(), name='update_article'),
     path('delete/<int:pk>/<slug:slug>', ArticleDeleteView.as_view(), name='delete_article'),
+
+    path('index/', ArticlesIndexView.as_view(), name='articles_index'),
 
     path('show/<int:pk>/<slug:slug>', ArticleDetailView.as_view(), name='article_detail'),
 

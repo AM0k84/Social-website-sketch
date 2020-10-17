@@ -143,7 +143,7 @@ class MostPopularVideosListView(ListView):
             hit_count_generic__hit__created__gte=period
         ).annotate(
             counts=models.Count('hit_count_generic__hit')
-        ).order_by('-counts')[:20]
+        ).order_by('-counts').filter(is_promoted=False)[:20]
 
 
 #wszystkie promowane

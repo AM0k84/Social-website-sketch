@@ -66,6 +66,32 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return reverse_lazy('news:all_articles_list')
 
 
+
+class ArticlesIndexView(ListView):
+    template_name = 'news/articles_index.html'
+    queryset = Article.objects.all().order_by('-pk').filter(is_promoted=True)
+    paginate_by = 5
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['last_add_articles'] = Article.objects.all().order_by('-pk')[:5]
+        context['last_trending_articles'] = Article.objects.filter(
+            hit_count_generic__hit__created__gte=(datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(minutes=10))
+        ).annotate(
+            counts=models.Count('hit_count_generic__hit')
+        ).order_by('-counts').filter(is_promoted=False)[:5]
+        context['last_hot_articles'] = Article.objects.filter(
+            hit_count_generic__hit__created__gte=(datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(minutes=10))
+        ).annotate(
+            counts=models.Count('hit_count_generic__hit')
+        ).order_by('-counts').filter(is_promoted=True)[:5]
+
+
+        return context
+
+
+
 class ArticleDetailView(FormMixin, HitCountDetailView):
     template_name = 'news/article_detail.html'
     model = Article

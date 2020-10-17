@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load hitcount_tags %}
+
+{% block title %} BEATSPOT: STRONA  GŁÓWNA NEWSÓW {% endblock %}
+
+
+{% block body %}
+
+    {#LISTA WSZYSTKICH ARTYKUŁÓW#}
+
+    STTONA GŁÓWNA NEWSÓW <br><br>
+
+
+MEGA HOT TRENDING PROMOWANE:<br>
+{% for articles in last_hot_articles %}
+    {{ articles.title }}<br>
+{% endfor %}
+<br><br>
+
+WSZYSTKIE PROMOWANE <br>
+{% for articles in object_list %}
+    {{ articles.title }}<br>
+{% endfor %}
+<br><br>
+
+
+
+LAST TRENDING:<br>
+{% for articles in last_trending_articles %}
+    {{ articles.title }}<br>
+{% endfor %}
+<br><br>
+
+OSTATNIO DODANE (wszystkie newsy)<br>
+{% for articles in last_add_articles %}
+    {{ articles.title }}<br>
+{% endfor %}
+{#DODAĆ LINK DO PRZENOSZENIA DO WSZYSTKICH NEWSOW#}
+<br><br>
+
+  {#PAGINACJA#}
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo; POPRZEDNIA </a>
+        {% endif %}
+        Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"> NASTĘPNA &raquo;</a>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
+
+
+

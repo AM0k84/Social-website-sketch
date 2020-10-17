@@ -8,148 +8,162 @@
 
 {#WIDEO#}
 
-{%  block body %}
+{% block body %}
 
-PODGLĄD VIDEO <br> <br>
+    PODGLĄD VIDEO <br> <br>
 
 
-{% video video.youtube_video 'large' %} <br>
+    {% video video.youtube_video 'large' %} <br>
 
-{#ID_video: {{ video.id }} <br>#}
-TYTUŁ: {{ video.video_title }} <br>
+    {#ID_video: {{ video.id }} <br>#}
+    TYTUŁ: {{ video.video_title }} <br>
     {% if user.id == video.author.id %}
         <small>
-            <a class="btn btn-outline-primary btn-sm" role="button" href="{% url 'video:update_video' pk=video.pk slug=video.slug  %}"> <i
-                            class="far fa-edit"></i> </a>
-            <a class="btn btn-outline-primary btn-sm" role="button" href="{% url 'video:delete_video' pk=video.pk slug=video.slug  %}"><i
-                            class="far fa-trash-alt"></i> </a> <br>
+            <a class="btn btn-outline-primary btn-sm" role="button"
+               href="{% url 'video:update_video' pk=video.pk slug=video.slug %}"> <i
+                    class="far fa-edit"></i> </a>
+            <a class="btn btn-outline-primary btn-sm" role="button"
+               href="{% url 'video:delete_video' pk=video.pk slug=video.slug %}"><i
+                    class="far fa-trash-alt"></i> </a> <br>
         </small>
     {% endif %}
 
 
-{% for category in video.category.iterator %}
-    <a class="badge badge-pill badge-secondary" href="{% url 'video:category_videos_list'  category.slug %}">    {{ category | upper}} </a>
-{% endfor %} <br>
+    {% for category in video.category.iterator %}
+        <a class="badge badge-pill badge-secondary"
+           href="{% url 'video:category_videos_list'  category.slug %}">    {{ category | upper }} </a>
+    {% endfor %} <br>
 
-Data dodania: {{ video.created_on.date }} <br>
-Godzina dodania: {{ video.created_on.time }} <br>
-Wyświetlenia (w sumie): {{ hitcount.total_hits }}<br>
-Wyświetlenia (ostatnie 10 min): {% get_hit_count for video within "minutes=10" %} <br>
-
-
-
-TREŚĆ: {{ video.body | safe }}
-LINK: <a href="{% url 'video:video_detail' pk=video.pk slug=video.slug  %}">
-{% url 'video:video_detail' pk=video.pk slug=video.slug  %}</a> <br>
-LINK DO YOUTUBE: <a href="{{ video.youtube_video }}">{{ video.youtube_video }} </a> <br> <br>
+    Data dodania: {{ video.created_on.date }} <br>
+    Godzina dodania: {{ video.created_on.time }} <br>
+    Wyświetlenia (w sumie): {{ hitcount.total_hits }}<br>
+    Wyświetlenia (ostatnie 10 min): {% get_hit_count for video within "minutes=10" %} <br>
 
 
 
+    TREŚĆ: {{ video.body | safe }}
+    LINK: <a href="{% url 'video:video_detail' pk=video.pk slug=video.slug %}">
+    {% url 'video:video_detail' pk=video.pk slug=video.slug %}</a> <br>
+    LINK DO YOUTUBE: <a href="{{ video.youtube_video }}">{{ video.youtube_video }} </a> <br> <br>
 
 
-                {% if video.author.photo %}
-                    <img style="height:170px; width:170px; margin:auto"
-                         src="{{ video.author.photo.url }}" alt="Photo">
-                {% else %}
-                    <img style="height:170px; width:170px; margin:auto"
-                         src="{% static 'images/default_photo.png' %}" alt="Photo">
-                {% endif %}
+
+
+
+    {% if video.author.photo %}
+        <img style="height:170px; width:170px; margin:auto"
+             src="{{ video.author.photo.url }}" alt="Photo">
+    {% else %}
+        <img style="height:170px; width:170px; margin:auto"
+             src="{% static 'images/default_photo.png' %}" alt="Photo">
+    {% endif %}
+    <br>
+    Autor: <a href="{% url 'profile' video.author %}"> {{ video.author }} </a><br>
+
+
+    {% if video.author.website_url %}
+    <a class="btn btn-outline-primary btn-sm" role="button"
+       href="{{ video.author.website_url }}"> <i class="fas fa-house-user"></i> </a>
+    {% endif %}
+    {% if video.author.facebook_url %}
+    <a class="btn btn-outline-primary  btn-sm" role="button"
+       href="{{ video.author.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
+    {% endif %}
+    {% if video.author.instagram_url %}
+    <a class="btn btn-outline-primary  btn-sm" role="button"
+       href="{{ video.author.instagram_url }}"> <i class="fab fa-instagram"></i> </a>
+    {% endif %}
+    {% if video.author.soundcloud_url %}
+    <a class="btn btn-outline-primary  btn-sm" role="button"
+       href="{{ video.author.soundcloud_url }}"> <i class="fab fa-soundcloud"></i> </a>
+    {% endif %}
 <br>
-              Autor: <a
-                            href="{% url 'profile' video.author %}"> {{ video.author }} </a><br>
-
-                        <a class="btn btn-outline-primary btn-sm" role="button"
-                           href="{{ video.author.website_url }}"> <i class="fas fa-house-user"></i> </a>
-                        <a class="btn btn-outline-primary  btn-sm" role="button"
-                           href="{{ video.author.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
-                        <a class="btn btn-outline-primary  btn-sm" role="button"
-                           href="{{ video.author.instagram_url }}"> <i class="fab fa-instagram"></i> </a><br>
 
 
-                        {{ video.author.bio }}
+    {{ video.author.bio }}
 
 
-<br><br>
-{#    KOMENTARZE#}
-{#    @todo: DODAĆ PAGINACJĘ KOMENTARZY#}
+    <br><br>
+    {#    KOMENTARZE#}
+    {#    @todo: DODAĆ PAGINACJĘ KOMENTARZY#}
 
-DODAJ KOMENTARZ <br>
+    DODAJ KOMENTARZ <br>
 
-{% if user.is_authenticated %}
-    <form method="post" >
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-outline-primary">DODAJ KOMENTARZ</button>
-    </form>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-primary">DODAJ KOMENTARZ</button>
+        </form>
     {% else %}
-    <a href="{% url 'user:login' %}"> Zaloguj </a> sie aby dodać komentarz <br>
-{% endif %}
-<hr>
+        <a href="{% url 'user:login' %}"> Zaloguj </a> sie aby dodać komentarz <br>
+    {% endif %}
+    <hr>
 
 
-{% if not video.comments.all %}
-    Brak komentarzy <br>
-{% else %}
-    ILOŚĆ KOMENTARZY: {{ comments_number }} (bedzie wyswietlalo tylko 2 bo tak jest paginacja ustawiona)<br> <br>
-
-{%  for comment in comments %}
-
-    <a href="{% url 'profile' video.author %}">
-    {% if comment.author.photo %}
-        <img style="height:70px; width:70px; border-radius:50%; margin:auto"
-              src="{{ comment.author.photo.url}}" alt="Photo">
+    {% if not video.comments.all %}
+        Brak komentarzy <br>
     {% else %}
-        <img style="height:70px; width:70px; border-radius:50%; margin:auto"
-          src="{% static 'images/default_photo.png' %}" alt="Photo">
-    {% endif %} </a> <br>
+        ILOŚĆ KOMENTARZY: {{ comments_number }} (bedzie wyswietlalo tylko 2 bo tak jest paginacja ustawiona)<br> <br>
 
-    Skomentował: <a href="{% url 'profile' comment.author %}"> {{ comment.author }} </a> <br>
-    Dnia: {{ comment.created_on }}<br>
-    Tytuł: {{ comment.title }} <br>
-    Treść: {{ comment.body  }} <br> <br>
-{% endfor %}
+        {% for comment in comments %}
+
+            <a href="{% url 'profile' video.author %}">
+                {% if comment.author.photo %}
+                    <img style="height:70px; width:70px; border-radius:50%; margin:auto"
+                         src="{{ comment.author.photo.url }}" alt="Photo">
+                {% else %}
+                    <img style="height:70px; width:70px; border-radius:50%; margin:auto"
+                         src="{% static 'images/default_photo.png' %}" alt="Photo">
+                {% endif %} </a> <br>
+
+            Skomentował: <a href="{% url 'profile' comment.author %}"> {{ comment.author }} </a> <br>
+            Dnia: {{ comment.created_on }}<br>
+            Tytuł: {{ comment.title }} <br>
+            Treść: {{ comment.body }} <br> <br>
+        {% endfor %}
 
         {% if comments.has_previous %}
-        <a href="?page={{ comments.previous_page_number }}">&laquo; NOWSZE KOMENTARZE </a>
+            <a href="?page={{ comments.previous_page_number }}">&laquo; NOWSZE KOMENTARZE </a>
+        {% endif %}
+
+        Strona komentarzy {{ comments.number }} z {{ comments.paginator.num_pages }}.
+
+        {% if comments.has_next %}
+            <a href="?page={{ comments.next_page_number }}"> STARSZE KOMENTARZE &raquo;</a>
+            {#    {% endif %}#}
+
+        {% endif %}
     {% endif %}
 
-    Strona komentarzy {{ comments.number }} z {{ comments.paginator.num_pages }}.
-
-    {% if comments.has_next %}
-        <a href="?page={{ comments.next_page_number }}"> STARSZE KOMENTARZE &raquo;</a>
-{#    {% endif %}#}
-
-{% endif %}
-    {% endif %}
-
-<br> <br>
+    <br> <br>
 
 
-{#    INNY WCZEŚNIEJSZY SPOSOB NA WYSWIETLENIE KOMENTARZY ALE BEZ PAGINACJI#}
-{#{% if not video.comments.all %}#}
-{#    Brak komentarzy <br>#}
-{#{% else %}#}
-{#    {% with video.comments.count as total_comments %}#}
-{#    Ilość wszystkich komentarzy: {{ total_comments }}#}
-{#    {% endwith %}#}
-{#<br><br>#}
-{##}
-{#{% for comment in video.comments.all %}#}
-{#    Skomentował: <a href="{% url 'profile' comment.author %}"> {{ comment.author }} </a> <br>#}
-{#    Dnia: {{ comment.created_on }}<br>#}
-{#    Tytuł: {{ comment.title }} <br>#}
-{#    Treść: {{ comment.body  }} <br> <br>#}
-{#    MOŻNA TEŻ SPRÓBOWAĆ Z LINEBREAKS#}
-{#    Treść: {{ comment.body | linebreaks }}#}
-{#{% endfor %}#}
-{#{% endif %}#}
-{#<br> <br>#}
+    {#    INNY WCZEŚNIEJSZY SPOSOB NA WYSWIETLENIE KOMENTARZY ALE BEZ PAGINACJI#}
+    {#{% if not video.comments.all %}#}
+    {#    Brak komentarzy <br>#}
+    {#{% else %}#}
+    {#    {% with video.comments.count as total_comments %}#}
+    {#    Ilość wszystkich komentarzy: {{ total_comments }}#}
+    {#    {% endwith %}#}
+    {#<br><br>#}
+    {##}
+    {#{% for comment in video.comments.all %}#}
+    {#    Skomentował: <a href="{% url 'profile' comment.author %}"> {{ comment.author }} </a> <br>#}
+    {#    Dnia: {{ comment.created_on }}<br>#}
+    {#    Tytuł: {{ comment.title }} <br>#}
+    {#    Treść: {{ comment.body  }} <br> <br>#}
+    {#    MOŻNA TEŻ SPRÓBOWAĆ Z LINEBREAKS#}
+    {#    Treść: {{ comment.body | linebreaks }}#}
+    {#{% endfor %}#}
+    {#{% endif %}#}
+    {#<br> <br>#}
 
 
-{#PAGINACJA#}
+    {#PAGINACJA#}
 
 
 
 
 
-{%  endblock %}
+{% endblock %}

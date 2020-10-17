@@ -2,40 +2,56 @@
 {% load static %}
 
 
-{%  block body%}
+{% block body %}
 
     <br>
 
-{% if profile.photo %}
+    {% if profile.photo %}
 
-<img style="height:250px; width:250px; margin:auto"
-      src="{{ profile.photo.url}}" alt="Photo"><br>
+        <img style="height:250px; width:250px; margin:auto"
+             src="{{ profile.photo.url }}" alt="Photo"><br>
 
-{% else %}
+    {% else %}
 
-    <img style="height:250px; width:250px; margin:auto"
-      src="{% static 'images/default_photo.png' %}" alt="Photo"><br>
+        <img style="height:250px; width:250px; margin:auto"
+             src="{% static 'images/default_photo.png' %}" alt="Photo"><br>
 
-{% endif %}
+    {% endif %}
+    PROFIL: {{ profile.username }} <br>
+    {% if profile.website_url %}
+        <a class="btn btn-outline-primary btn-sm" role="button"
+           href="{{ profile.website_url }}"> <i class="fas fa-house-user"></i> </a>
+    {% endif %}
+    {% if profile.facebook_url %}
+        <a class="btn btn-outline-primary  btn-sm" role="button"
+           href="{{ profile.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
+    {% endif %}
+    {% if profile.instagram_url %}
+        <a class="btn btn-outline-primary  btn-sm" role="button"
+           href="{{ profile.instagram_url }}"> <i class="fab fa-instagram"></i> </a>
+    {% endif %}
+    {% if profile.soundcloud_url %}
+        <a class="btn btn-outline-primary  btn-sm" role="button"
+           href="{{ profile.soundcloud_url }}"> <i class="fab fa-soundcloud"></i> </a>
+    {% endif %}<br>
+    Wyświetlenia: {{ hitcount.total_hits }}<br>
 
-Wyświetlenia: {{ hitcount.total_hits }}<br>
-PROFIL: {{ profile.username }} <br>
-DOŁĄCZYŁ: {{ profile.date_joined }} <br>
-IMIE: {{ profile.first_name }} <br>
-NAZWISKO: {{ profile.last_name }} <br>
-LAST LOGIN: {{ profile.last_login }} <br>
-EMAIL: {{ profile.email }} <br>
-BIOGRAFIA: {{ profile.bio }} <br> <br>
+    DOŁĄCZYŁ: {{ profile.date_joined }} <br>
+    IMIE: {{ profile.first_name }} <br>
+    NAZWISKO: {{ profile.last_name }} <br>
+    LAST LOGIN: {{ profile.last_login }} <br>
+    EMAIL: {{ profile.email }} <br>
+    BIOGRAFIA: {{ profile.bio }} <br> <br>
 
 
-NEWSY USERA:<br>
+    NEWSY USERA:<br>
     {% for article in user_articles %}
 
         {{ article.title }} <br>
 
     {% endfor %} <br>
 
-VIDEO USERA:<br>
+    VIDEO USERA:<br>
 
     {% for video in user_videos %}
 
