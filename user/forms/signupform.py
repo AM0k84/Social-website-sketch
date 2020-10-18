@@ -9,8 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 
 class SignUpForm(UserCreationForm):
-    username = UsernameField(label=_("Nazwa użytkownika"), widget=forms.TextInput(), )
-    email = forms.EmailField(max_length=254, label="E-mail", widget=forms.EmailInput(), validators=[EmailValidator])
+    username = UsernameField(label=_("Nazwa użytkownika"), widget=forms.TextInput(attrs={"class": "form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded"}) )
+    email = forms.EmailField(max_length=254, label="E-mail", widget=forms.EmailInput(attrs={"class": "form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded"}), validators=[EmailValidator])
     checkbox = forms.BooleanField(label="Zaakceptuj regulamin", required=True)
 
     class Meta:

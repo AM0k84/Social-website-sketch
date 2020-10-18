@@ -1,4 +1,3 @@
-from ckeditor.fields import RichTextField
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
@@ -8,6 +7,7 @@ from embed_video.fields import EmbedVideoField
 
 from hitcount.models import HitCountMixin
 from hitcount.settings import MODEL_HITCOUNT
+from tinymce.models import HTMLField
 
 
 # todo: DOROBIĆ KATEGORIĘ DO VIDEO (MANY TO MANY? CZY MOŻE JEDNAK TYLKO 1 KATEGORIĘ DLA VIDEO?)
@@ -45,8 +45,8 @@ class Video(Base, HitCountMixin):
     category = models.ManyToManyField(VideoCategory,
                                       related_name='cat_videos')  # todo: USTAWIĆ OD DELETE i zmienić related name
     snippet = models.TextField()
-    body = RichTextField(null=False)
-    youtube_video = EmbedVideoField(blank=True)
+    body = HTMLField(max_length=500, null=False)
+    youtube_video = EmbedVideoField(blank=False, null=False)
     is_promoted = models.BooleanField(default=False)
     slug = models.SlugField(null=False, unique=False)
 

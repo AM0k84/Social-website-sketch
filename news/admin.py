@@ -1,11 +1,13 @@
 from django.contrib import admin
 
+from news.forms import AddArticleForm
 from news.models import Article, ArticleCategory, ArticleComment
 
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'body', 'article_categories', 'author', 'created_on', 'is_promoted', 'slug')
-    prepopulated_fields = {'slug': ('title',)}
+
+
 
 
 class ArticleCategoryAdmin(admin.ModelAdmin):

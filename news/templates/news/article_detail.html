@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load hitcount_tags %}
+{% load crispy_forms_tags %}
 
 {% block title %} BEATSPOT: {{ article.title | upper }}  {% endblock %}
 
@@ -91,12 +92,13 @@
 
     {#    KOMENTARZE#}
 
-    DODAJ KOMENTARZ <br>
+    DODAJ KOMENTARZ <br><br>
 
     {% if user.is_authenticated %}
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form|crispy }}
+{#            {{ form.as_p }}#}
             <button type="submit" class="btn btn-outline-primary">DODAJ KOMENTARZ</button>
         </form>
     {% else %}

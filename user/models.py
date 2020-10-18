@@ -9,10 +9,10 @@ class Profile(AbstractUser, HitCountMixin):
     bio = models.TextField(blank=True, null=True, default='Brak')
     slug = models.SlugField(null=False, unique=True)
     photo = models.ImageField(blank=True, null=True, upload_to='profile_photos')
-    website_url = models.CharField(max_length=200, blank=True, null=True)
-    instagram_url = models.CharField(max_length=200, blank=True, null=True)
-    facebook_url = models.CharField(max_length=200, blank=True, null=True)
-    soundcloud_url = models.CharField(max_length=200, blank=True, null=True)
+    website_url = models.URLField(max_length=250, blank=True, null=True)
+    instagram_url = models.URLField(max_length=250, blank=True, null=True)
+    facebook_url = models.URLField(max_length=250, blank=True, null=True)
+    soundcloud_url = models.URLField(max_length=250, blank=True, null=True)
 
 
 

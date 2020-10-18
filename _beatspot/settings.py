@@ -41,13 +41,12 @@ INSTALLED_APPS = [
     'news',
     'music',
     'web',
-    'ckeditor',
     'video',
     'embed_video',
     'hitcount',
-    # "crispy_forms",
-
+    'crispy_forms',
     # 'audiofield',
+    'tinymce',
 
 
 
@@ -148,6 +147,8 @@ AUTH_USER_MODEL = 'user.Profile'
 #USTAWIENIA ZLICZANIA WYŚWIETLEŃ.
 #ZALICZA 1 WYŚWIETLENIE NA 1 SEKUNDĘ
 HITCOUNT_KEEP_HIT_ACTIVE = {'seconds': 1}
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 

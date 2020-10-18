@@ -1,15 +1,21 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 {% block title %}BEATSPOT: DODAJ VIDEO{% endblock %}
 
 {% block body %}
 
-DODAJ VIDEO <br><br>
+    DODAJ VIDEO <br><br>
 
+    <center>
     <form method="post" enctype='multipart/form-data'>
         {% csrf_token %}
-        {{form.as_p}}
+        {#        {{form.as_p}}#}
         {{ form.media | safe }}
+        {#        {%  crispy form %}#}
+        {{ form|crispy }}
         <button type="submit" class="btn btn-outline-primary">DODAJ VIDEO</button>
     </form>
+</center>
 
 {% endblock %}

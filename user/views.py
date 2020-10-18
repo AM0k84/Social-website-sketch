@@ -11,6 +11,7 @@ from django.views.generic import CreateView, FormView, UpdateView
 from hitcount.views import HitCountDetailView
 
 from news.models import Article
+from user.forms.editprofileform import EditProfileForm
 from user.forms.signupform import SignUpForm
 from user.models import Profile
 from video.models import Video
@@ -41,8 +42,7 @@ class ProfileView(HitCountDetailView):
 class EditProfileInfoView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     template_name = 'profile/edit_profile.html'
-    fields = ['bio', 'photo', 'email', 'first_name', 'last_name', 'website_url', 'facebook_url', 'instagram_url',
-              'soundcloud_url']
+    form_class = EditProfileForm
 
     def get_success_url(self):
         slug = self.kwargs['slug']

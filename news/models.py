@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from tinymce.models import HTMLField
 
-from ckeditor.fields import RichTextField
 from hitcount.models import HitCountMixin
 from hitcount.settings import MODEL_HITCOUNT
 
@@ -38,10 +38,10 @@ class Article(Created, HitCountMixin):
     title = models.CharField(max_length=120)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     snippet = models.TextField(null=False)  # ustawić max_lenght
-    body = RichTextField(null=False)
+    body = HTMLField(max_length=500, null=False)
     # todo: USTAWIĆ OD DELETE W CATEGORY I ZMIENIĆ RELATED NAME
     category = models.ManyToManyField(ArticleCategory, related_name='articles')
-    image = models.ImageField(blank=True, null=True, upload_to='article_image/')
+    image = models.ImageField(blank=False, null=False, upload_to='article_image/')
     is_promoted = models.BooleanField(default=False)
     slug = models.SlugField(null=False, unique=False)
 
