@@ -41,6 +41,14 @@ class AddArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ('title', 'image', 'category', 'snippet', 'body')
+        widgets = {
+            'category': forms.CheckboxSelectMultiple(attrs={"class": "column-checkbox"}),
+        }
+        labels = {
+            'category': 'Kategorie',
+
+        }
+        help_texts = {'category': 'Możliwy wielokrotny wybór'}
 
 
 class EditArticleForm(forms.ModelForm):
@@ -72,27 +80,37 @@ class EditArticleForm(forms.ModelForm):
         label="Treść newsa",
         max_length=500,
         help_text="Długi opis",
-        widget=TinyMCE(attrs={"class": "form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded"}),
+        widget=TinyMCE(attrs={}),
         required=True,
     )
 
     class Meta:
         model = Article
         fields = ('title', 'image', 'category', 'snippet', 'body')
+        widgets = {
+            'category': forms.CheckboxSelectMultiple(attrs={"class": "Col-2"}),
+        }
+        labels = {
+            'category': 'Kategorie',
+
+        }
+        help_texts = {'category': 'Możliwy wielokrotny wybór'}
 
 
 class CommentForm(forms.ModelForm):
     title = forms.CharField(
         label="Tytuł",
         max_length=120,
-        widget=forms.TextInput(attrs={"class": "form-control form-control-lg col-6 pr-5 shadow p-1 mb-1 bg-white rounded"}),
+        widget=forms.TextInput(
+            attrs={"class": "form-control form-control-lg col-6 pr-5 shadow p-1 mb-1 bg-white rounded"}),
         required=True,
     )
 
     body = forms.CharField(
         label="Treść komentarza",
         max_length=300,
-        widget=forms.Textarea(attrs={"class": "form-control form-control-lg col-6 pr-5 shadow p-1 mb-1 bg-white rounded"}),
+        widget=forms.Textarea(
+            attrs={"class": "form-control form-control-lg col-6 pr-5 shadow p-1 mb-1 bg-white rounded"}),
         required=True,
 
     )

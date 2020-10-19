@@ -11,16 +11,24 @@
     {#W widoku nie używam mixina do sprawdzenia czy user, który usuwa newsa jest jego właścicielem#}
     {#więc muszę to zrobić tutaj.#}
     {% if user.id == article.author.id %}
-    {##todo: wycentrować za pomocą css    #}
-    <center>
-        <form method="post" enctype='multipart/form-data'>
-            {% csrf_token %}
-            {{ form.media }}
-            {#        {%  crispy form %}#}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-outline-primary">EDYTUJ NEWS</button>
-        </form>
-    </center>
+        {##todo: wycentrować za pomocą css    #}
+        <center>
+            <form method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form.media }}
+                {#        {%  crispy form %}#}
+                {#            {{ form|crispy }}#}
+                {{ form.title|as_crispy_field }}
+                {{ form.image|as_crispy_field }}
+                {{ form.category|as_crispy_field }}
+                {{ form.snippet|as_crispy_field }}
+                {{ form.body|as_crispy_field }}
+                <button type="submit" class="btn btn-outline-primary">EDYTUJ NEWS</button>
+
+
+
+            </form>
+        </center>
     {% else %}
         NIE MOŻESZ EDYTOWA TEGO NEWSA!
     {% endif %}

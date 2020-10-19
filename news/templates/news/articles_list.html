@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load static %}
 {% load hitcount_tags %}
 
@@ -7,7 +8,6 @@
 
 {% block body %}
 
-    {#LISTA WSZYSTKICH ARTYKUŁÓW#}
 
     WSZYSTKIE DODANE ARTYKUŁY <br><br>
 
@@ -33,10 +33,10 @@
                 <a class="badge badge-pill badge-secondary"
                    href="{% url 'news:category_articles_list'  category.slug %}">    {{ category | upper }} </a>
             {% endfor %} <br>
-            {#    KATEGORIA_string: {{ article.article_categories }} <br>#}
+                KATEGORIA_string: {{ article.article_categories }} <br>
 
             AUTOR: <a href="{% url 'profile' article.author %}">{{ article.author }} </a><br>
-            {#    KATEGORIA_iterator:#}
+                KATEGORIA_iterator:
 
             SNIPPET:
             {{ article.snippet }} <a href="{{ article.get_absolute_url }}"> czytaj dalej >>> </a> <br><br><br>

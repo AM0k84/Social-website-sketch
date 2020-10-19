@@ -113,6 +113,29 @@ class VideoDetailView(FormMixin, HitCountDetailView):
             return self.form_invalid(form)
 
 
+
+class VideosIndexView(ListView):
+    template_name = 'video/videos_index.html'
+    queryset = Video.objects.all().order_by('-pk').filter(is_promoted=True)
+    paginate_by = 5
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['last_add_videos'] = Video.objects.all().order_by('-pk')[:5]
+        context['last_trending_videos'] = Video.objects.filter(
+            hit_count_generic__hit__created__gte=(datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(minutes=10))
+        ).annotate(
+            counts=models.Count('hit_count_generic__hit')
+        ).order_by('-counts').filter(is_promoted=False)[:5]
+        context['last_hot_videos'] = Video.objects.filter(
+            hit_count_generic__hit__created__gte=(datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(minutes=10))
+        ).annotate(
+            counts=models.Count('hit_count_generic__hit')
+        ).order_by('-counts').filter(is_promoted=True)[:5]
+        return context
+
+
 class CategoryVideoList(ListView):
     template_name = 'video/category_videos_list.html'
     model = Video

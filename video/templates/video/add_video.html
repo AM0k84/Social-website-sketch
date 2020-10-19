@@ -8,14 +8,19 @@
     DODAJ VIDEO <br><br>
 
     <center>
-    <form method="post" enctype='multipart/form-data'>
-        {% csrf_token %}
-        {#        {{form.as_p}}#}
-        {{ form.media | safe }}
-        {#        {%  crispy form %}#}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-outline-primary">DODAJ VIDEO</button>
-    </form>
-</center>
+        <form method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
+
+            {{ form.media | safe }}
+
+{#            {{ form|crispy }}#}
+             {{ form.video_title|as_crispy_field }}
+            {{ form.youtube_video|as_crispy_field }}
+            {{ form.category|as_crispy_field }}
+            {{ form.snippet|as_crispy_field }}
+            {{ form.body|as_crispy_field }}
+            <button type="submit" class="btn btn-outline-primary">DODAJ VIDEO</button>
+        </form>
+    </center>
 
 {% endblock %}

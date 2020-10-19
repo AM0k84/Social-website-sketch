@@ -45,6 +45,14 @@ class AddVideoForm(forms.ModelForm):
     class Meta:
         model = Video
         fields = ('video_title', 'youtube_video', 'category', 'snippet', 'body')
+        widgets = {
+            'category': forms.CheckboxSelectMultiple(attrs={"class": "column-checkbox"}),
+        }
+        labels = {
+            'category': 'Kategorie',
+
+        }
+        help_texts = {'category': 'Możliwy wielokrotny wybór'}
 
 
 class EditVideoForm(forms.ModelForm):
@@ -85,6 +93,14 @@ class EditVideoForm(forms.ModelForm):
     class Meta:
         model = Video
         fields = ('video_title', 'youtube_video', 'category', 'snippet', 'body')
+        widgets = {
+            'category': forms.CheckboxSelectMultiple(attrs={"class": "column-checkbox"}),
+        }
+        labels = {
+            'category': 'Kategorie',
+
+        }
+        help_texts = {'category': 'Możliwy wielokrotny wybór'}
 
 
 class VideoCommentForm(forms.ModelForm):

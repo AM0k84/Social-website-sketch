@@ -49,7 +49,7 @@
 
 
 
-
+    <a href="{% url 'profile' video.author %}">
     {% if video.author.photo %}
         <img style="height:170px; width:170px; margin:auto"
              src="{{ video.author.photo.url }}" alt="Photo">
@@ -57,6 +57,7 @@
         <img style="height:170px; width:170px; margin:auto"
              src="{% static 'images/default_photo.png' %}" alt="Photo">
     {% endif %}
+    </a>
     <br>
     Autor: <a href="{% url 'profile' video.author %}"> {{ video.author }} </a><br>
 

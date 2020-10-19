@@ -2,40 +2,40 @@
 {% load static %}
 {% load hitcount_tags %}
 
-{% block title %} BEATSPOT: STRONA  GŁÓWNA NEWSÓW {% endblock %}
+{% block title %} BEATSPOT: STRONA  GŁÓWNA VIDEO {% endblock %}
 
 
 {% block body %}
 
     {#LISTA WSZYSTKICH ARTYKUŁÓW#}
 
-    STRONA GŁÓWNA NEWSÓW <br><br>
+    STRONA GŁÓWNA VIDEO <br><br>
 
 
 MEGA HOT TRENDING PROMOWANE:<br>
-{% for articles in last_hot_articles %}
-    {{ articles.title }}<br>
+{% for videos in last_hot_videos %}
+    {{ videos.video_title }}<br>
 {% endfor %}
 <br><br>
 
 WSZYSTKIE PROMOWANE <br>
-{% for articles in object_list %}
-    {{ articles.title }}<br>
+{% for videos in object_list %}
+    {{ videos.video_title }}<br>
 {% endfor %}
 <br><br>
 
 
 LAST TRENDING:<br>
-{% for articles in last_trending_articles %}
-    {{ articles.title }}<br>
+{% for videos in last_trending_videos %}
+    {{ videos.video_title }}<br>
 {% endfor %}
 <br><br>
 
-OSTATNIO DODANE (wszystkie newsy)<br>
-{% for articles in last_add_articles %}
-    {{ articles.title }}<br>
+OSTATNIO DODANE (wszystkie video)<br>
+{% for videos in last_add_videos %}
+    {{ videos.video_title }}<br>
 {% endfor %}
-{#DODAĆ LINK DO PRZENOSZENIA DO WSZYSTKICH NEWSOW#}
+{#DODAĆ LINK DO PRZENOSZENIA DO WSZYSTKICH VIDEO#}
 <br><br>
 
   {#PAGINACJA#}

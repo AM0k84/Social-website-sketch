@@ -55,40 +55,41 @@
     {% url 'news:article_detail' pk=article.pk slug=article.slug %}</a> <br><br>
 
 
-
-    {% if article.author.photo %}
-        <img style="height:170px; width:170px; margin:auto"
-             src="{{ article.author.photo.url }}" alt="Photo">
-    {% else %}
-        <img style="height:170px; width:170px; margin:auto"
-             src="{% static 'images/default_photo.png' %}" alt="Photo">
-    {% endif %}
+    <a href="{% url 'profile' article.author %}">
+        {% if article.author.photo %}
+            <img style="height:170px; width:170px; margin:auto"
+                 src="{{ article.author.photo.url }}" alt="Photo">
+        {% else %}
+            <img style="height:170px; width:170px; margin:auto"
+                 src="{% static 'images/default_photo.png' %}" alt="Photo">
+        {% endif %}
+    </a>
     <br>
 
     Autor: <a href="{% url 'profile' article.author %}"> {{ article.author }} </a> <br>
     {% if article.author.website_url %}
-    <a class="btn btn-outline-primary btn-sm" role="button"
-       href="{{ article.author.website_url }}"> <i class="fas fa-house-user"></i> </a>
+        <a class="btn btn-outline-primary btn-sm" role="button"
+           href="{{ article.author.website_url }}"> <i class="fas fa-house-user"></i> </a>
     {% endif %}
     {% if article.author.facebook_url %}
-    <a class="btn btn-outline-primary  btn-sm" role="button"
-       href="{{ article.author.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
+        <a class="btn btn-outline-primary  btn-sm" role="button"
+           href="{{ article.author.facebook_url }}"> <i class="fab fa-facebook"></i> </a>
     {% endif %}
     {% if article.author.instagram_url %}
-    <a class="btn btn-outline-primary  btn-sm" role="button"
-       href="{{ article.author.instagram_url }}"> <i class="fab fa-instagram"></i> </a>
+        <a class="btn btn-outline-primary  btn-sm" role="button"
+           href="{{ article.author.instagram_url }}"> <i class="fab fa-instagram"></i> </a>
     {% endif %}
     {% if article.author.soundcloud_url %}
-    <a class="btn btn-outline-primary  btn-sm" role="button"
-       href="{{ article.author.soundcloud_url }}"> <i class="fab fa-soundcloud"></i> </a>
+        <a class="btn btn-outline-primary  btn-sm" role="button"
+           href="{{ article.author.soundcloud_url }}"> <i class="fab fa-soundcloud"></i> </a>
     {% endif %}
-<br>
+    <br>
     {{ article.author.bio }}
 
 
 
     {#AUTORA MOŻNA RÓWNIEŻ ZAPISAĆ TAK: {{ article.author.username }} #}
-<br><br>
+    <br><br>
 
     {#    KOMENTARZE#}
 
@@ -98,7 +99,7 @@
         <form method="post">
             {% csrf_token %}
             {{ form|crispy }}
-{#            {{ form.as_p }}#}
+            {#            {{ form.as_p }}#}
             <button type="submit" class="btn btn-outline-primary">DODAJ KOMENTARZ</button>
         </form>
     {% else %}

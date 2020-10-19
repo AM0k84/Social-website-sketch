@@ -1,6 +1,6 @@
 from django.urls import path
 from video.views import AddVideo, AllVideosListView, CategoryVideoList, VideoDetailView, UpdateVideoView, \
-    VideoDeleteView, MostPopularVideosListView, PromotedVideosView, MostPopularPromotedVideosView
+    VideoDeleteView, MostPopularVideosListView, PromotedVideosView, MostPopularPromotedVideosView, VideosIndexView
 
 app_name = 'video'
 
@@ -11,6 +11,8 @@ urlpatterns = [
     path('add/', AddVideo.as_view(), name='add_video'),
     path('edit/<int:pk>/<slug:slug>', UpdateVideoView.as_view(), name='update_video'),
     path('delete/<int:pk>/<slug:slug>', VideoDeleteView.as_view(), name='delete_video'),
+
+    path('index/', VideosIndexView.as_view(), name='videos_index'),
 
     path('show/<int:pk>/<slug:slug>', VideoDetailView.as_view(), name='video_detail'),
 
