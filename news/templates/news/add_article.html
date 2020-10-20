@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% load static %}
-
-{% block css %}   <link rel="stylesheet" href="{% static 'css/news/style.css' %}">{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/news/style.css' %}">{% endblock %}
 
 {% block title %}BEATSPOT: DODAJ NEWS{% endblock %}
 
@@ -12,7 +12,7 @@
 
     {##todo: wycentrować za pomocą css    #}
 
-    <center>
+    <div class="form">
         <form method="post" enctype='multipart/form-data'>
             {% csrf_token %}
             {{ form.media }}
@@ -20,15 +20,17 @@
             {#            {{ form|crispy }}#}
             {{ form.title|as_crispy_field }}
             {{ form.image|as_crispy_field }}
+
             {{ form.category|as_crispy_field }}
             {{ form.snippet|as_crispy_field }}
             {{ form.body|as_crispy_field }}
 
-
-            <button type="submit" class="btn btn-outline-primary">DODAJ NEWS</button>
+            <p class="btnwrap">
+                <button type="submit" class="btn btn-outline-primary">DODAJ NEWS</button>
+            </p>
         </form>
-    </center>
 
+    </div>
 
 
 

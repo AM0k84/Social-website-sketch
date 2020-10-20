@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/user/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: EDYTUJ PROFIL {{ profile.username }} {% endblock %}
 
@@ -8,16 +11,17 @@
     EDYTUJ PROFIL: {{ profile.username }} <br><br>
 
     {##todo: wycentrować za pomocą css    #}
-    <center>
+    <div class="form">
         <form method="post" enctype='multipart/form-data'>
 
             {% csrf_token %}
             {#        {%  crispy form %}#}
             {{ form|crispy }}
 
-
-            <button type="submit" class="btn btn-outline-primary">ZAPISZ ZMIANY</button>
+            <p class="btnwrap">
+                <button type="submit" class="btn btn-outline-primary">ZAPISZ ZMIANY</button>
+            </p>
         </form>
-    </center>
+    </div>>
 
 {% endblock %}

@@ -69,6 +69,7 @@ class Article(Created, HitCountMixin):
         verbose_name_plural = 'Articles'
 
 
+
 class ArticleComment(Created):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

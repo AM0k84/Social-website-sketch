@@ -1,23 +1,28 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/user/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: REJESTRACJA {% endblock %}
 
 
 {% block body %}
 
-ZAREJESTRUJ SIĘ <br><br>
+    ZAREJESTRUJ SIĘ <br><br>
 
 
-<center>
-    <form method="post" >
-         {% csrf_token %}
+    <div class="form">
+        <form method="post">
+            {% csrf_token %}
             {{ form.media }}
             {#        {%  crispy form %}#}
             {{ form|crispy }}
-        <button type="submit" class="btn btn-outline-primary">ZAREJESTRUJ</button>
+            <p class="btnwrap">
+                <button type="submit" class="btn btn-outline-primary">ZAREJESTRUJ</button>
+            </p>
 
-    </form>
-</center>
+        </form>
+    </div>
 
 {% endblock %}

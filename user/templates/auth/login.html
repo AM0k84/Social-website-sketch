@@ -1,22 +1,29 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/user/style.css' %}">{% endblock %}
 
 {% block title %}BEATSPOT: LOGIN{% endblock %}
 
 
 {% block body %}
 
-ZALOGUJ <br><br>
-<center>
-    <form action="" method="post">
-  {% csrf_token %}
+    ZALOGUJ <br><br>
+    <div class="form">
+        <form action="" method="post">
+            {% csrf_token %}
 
 
-        <label for="username_input">Nazwa usera</label>
-        <input type="text" name="username" id="username_input" class="form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded">
-        <label for="password_input">Hasło</label>
-        <input type="password" name="password" id="password_input" class="form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded"><br>
-        <button type="submit" class="btn btn-outline-primary">ZALOGUJ</button>
-    </form>
-</center>
+            <label for="username_input">Nazwa usera</label>
+            <input type="text" name="username" id="username_input"
+                   class="form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded">
+            <label for="password_input">Hasło</label>
+            <input type="password" name="password" id="password_input"
+                   class="form-control form-control-lg pr-5 shadow p-1 mb-1 bg-white rounded"><br>
+            <p class="btnwrap">
+                <button type="submit" class="btn btn-outline-primary">ZALOGUJ</button>
+            </p>
+        </form>
+    </div>>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/news/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: ZAKTUALIZUJ {{ article.title }} {% endblock %}
 
@@ -12,7 +14,7 @@
     {#więc muszę to zrobić tutaj.#}
     {% if user.id == article.author.id %}
         {##todo: wycentrować za pomocą css    #}
-        <center>
+<div class="form">
             <form method="post" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {{ form.media }}
@@ -25,13 +27,14 @@
 
                 {{ form.snippet|as_crispy_field }}
                 {{ form.body|as_crispy_field }}
-                <button type="submit" class="btn btn-outline-primary">EDYTUJ NEWS</button>
+                <p class="btnwrap">
+                    <button type="submit" class="btn btn-outline-primary">EDYTUJ NEWS</button></p>
 
 
             </form>
-        </center>
+
     {% else %}
         NIE MOŻESZ EDYTOWA TEGO NEWSA!
     {% endif %}
-
+</div>
 {% endblock %}

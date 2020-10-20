@@ -1,3 +1,6 @@
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/news/style.css' %}">{% endblock %}
+
 {% if is_paginated %}
     {% if page_obj.has_previous %}
         <a href="?page={{ page_obj.previous_page_number }}">&laquo; POPRZEDNIA </a>

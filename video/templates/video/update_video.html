@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
+{% load static %}
+{% block css %}   <link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 {% block title %}BEATSPOT: EDYTUJ VIDEO{% endblock %}
 
 {% block body %}
@@ -9,8 +10,9 @@
 
     {#W widoku nie używam mixina do sprawdzenia czy user, który usuwa newsa jest jego właścicielem#}
     {#więc muszę to zrobić tutaj.#}
+    <div class="form">
     {% if user.id == video.author.id %}
-        <center>
+
             <form method="post" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {#        {{form.as_p}}#}
@@ -23,11 +25,12 @@
                 {{ form.category|as_crispy_field }}
                 {{ form.snippet|as_crispy_field }}
                 {{ form.body|as_crispy_field }}
-                <button type="submit" class="btn btn-outline-primary">ZAKTUALIZUJ VIDEO</button>
+                <p class="btnwrap">
+                    <button type="submit" class="btn btn-outline-primary">ZAKTUALIZUJ VIDEO</button></p>
             </form>
-        </center>
+
     {% else %}
         NIE MOŻESZ EDYTOWA TEGO VIDEO!
     {% endif %}
-
+</div>
 {% endblock %}

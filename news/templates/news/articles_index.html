@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/news/style.css' %}">{% endblock %}
+
 {% load hitcount_tags %}
 
+
 {% block title %} BEATSPOT: STRONA  GŁÓWNA NEWSÓW {% endblock %}
+
 
 
 {% block body %}
@@ -10,7 +14,16 @@
     {#LISTA WSZYSTKICH ARTYKUŁÓW#}
 
     STRONA GŁÓWNA NEWSÓW <br><br>
-
+{##todo: do zmiany ale mniej więcej tak:#}
+    <div class="row">
+  <div class="col-md-4">{% for articles in last_hot_articles %}
+      <div class="title" >{{ articles.title }}</div><br>
+{% endfor %}</div>
+  <div class="col-md-4">TYTUł<br>{% for articles in last_hot_articles %}
+    {{ articles.title }}<br>
+{% endfor %}</div>
+</div>
+<br><br>
 
 MEGA HOT TRENDING PROMOWANE:<br>
 {% for articles in last_hot_articles %}

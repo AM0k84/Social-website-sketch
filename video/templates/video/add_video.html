@@ -8,7 +8,7 @@
 
     DODAJ VIDEO <br><br>
 
-    <center>
+<div class="form">
         <form method="post" enctype='multipart/form-data'>
             {% csrf_token %}
 
@@ -20,8 +20,9 @@
             {{ form.category|as_crispy_field }}
             {{ form.snippet|as_crispy_field }}
             {{ form.body|as_crispy_field }}
-            <button type="submit" class="btn btn-outline-primary">DODAJ VIDEO</button>
+            <p class="btnwrap">
+                <button type="submit" class="btn btn-outline-primary">DODAJ VIDEO</button></p>
         </form>
-    </center>
+</div>
 
 {% endblock %}

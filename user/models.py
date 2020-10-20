@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -13,8 +14,6 @@ class Profile(AbstractUser, HitCountMixin):
     instagram_url = models.URLField(max_length=250, blank=True, null=True)
     facebook_url = models.URLField(max_length=250, blank=True, null=True)
     soundcloud_url = models.URLField(max_length=250, blank=True, null=True)
-
-
 
     # MOŻNA UTWORZYĆ ABSOLUTE URL ABY W TEMPLAE ZAMIAST LINKU WPISYWAC ABSOLUTEURL TAK JAK W KATEGORII ARTYKULU
     def save(self, *args, **kwargs):
