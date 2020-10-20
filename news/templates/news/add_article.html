@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load static %}
+
+{% block css %}   <link rel="stylesheet" href="{% static 'css/news/style.css' %}">{% endblock %}
 
 {% block title %}BEATSPOT: DODAJ NEWS{% endblock %}
 

@@ -1,0 +1,33 @@
+{% if object_list %}
+    {% for article in object_list %}
+        {% if article.image %}
+            <img src="{{ article.image.url }}"><br>
+        {% endif %}
+
+        Tytuł: <a href="{{ article.get_absolute_url }}"> {{ article.title|upper }} </a> <br>
+        {% if user.id == article.author.id %}
+            <small>
+                <a class="btn btn-outline-primary btn-sm" role="button"
+                   href="{% url 'news:update_article' pk=article.pk slug=article.slug %}"><i
+                        class="far fa-edit"></i></a>
+                <a class="btn btn-outline-primary btn-sm" role="button"
+                   href="{% url 'news:delete_article' pk=article.pk slug=article.slug %}"><i
+                        class="far fa-trash-alt"></i></a> <br>
+            </small>
+        {% endif %}
+        {% for category in article.category.iterator %}
+            <a class="badge badge-pill badge-secondary"
+               href="{% url 'news:category_articles_list'  category.slug %}">    {{ category | upper }} </a>
+        {% endfor %} <br>
+        KATEGORIA_string: {{ article.article_categories }} <br>
+
+        AUTOR: <a href="{% url 'profile' article.author %}">{{ article.author }} </a><br>
+        KATEGORIA_iterator:
+
+        SNIPPET:
+        {{ article.snippet }} <a href="{{ article.get_absolute_url }}"> czytaj dalej >>> </a> <br><br><br>
+
+    {% endfor %}
+{% else %}
+    Brak artykułów.
+{% endif %}
