@@ -1,51 +1,54 @@
-{% if user.is_authenticated %}
-
-    Witaj <a href="{% url 'profile' user.username %}">{{ user.username }} </a>
-    <a href="{% url "edit_profile" user.slug  %}">EDYCJA PROFILU</a>
-    <a href="{% url "user:change_password" %}">ZMIANA HASŁA</a>
-    <a href="{% url "user:logout" %}">WYLOGUJ</a> <br>
-
-    <a href="{% url 'news:add_article' %}"> DODAJ NEWS </a>
-    <a href="{% url 'video:add_video' %}"> DODAJ VIDEO </a> <br>
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/web/style.css' %}">{% endblock %}
 
 
-    <a href="{% url 'index' %}">HOME</a><br>
+    {% if user.is_authenticated %}
 
-    <a href="{% url 'news:articles_index' %}">INDEX NEWS</a>
-    <a href="{% url 'news:all_articles_list' %}">ALL NEWSY</a>
-    <a href="{% url 'news:trending' %}">POPULARNE NEWSY</a>
-    <a href="{% url 'news:promoted_articles' %}">PROMOWANE NEWSY</a>
-    <a href="{% url 'news:hot_promoted_articles' %}">POPULARNE PROMOWANE NEWSY</a><br>
+        Witaj <a href="{% url 'profile' user.username %}">{{ user.username }} </a>
+        <a href="{% url "edit_profile" user.slug  %}">EDYCJA PROFILU</a>
+        <a href="{% url "user:change_password" %}">ZMIANA HASŁA</a>
+        <a href="{% url "user:logout" %}">WYLOGUJ</a> <br>
 
-    <a href="{% url 'video:videos_index' %}">INDEX VIDEOS</a>
-    <a href="{% url 'video:all_videos_list' %}">VIDEO</a>
-    <a href="{% url 'video:trending' %}">POPULARNE VIDEO</a>
-    <a href="{% url 'video:promoted_videos' %}">PROMOWANE VIDEO</a>
-    <a href="{% url 'video:hot_promoted_videos' %}">POPULARNE PROMOWANE VIDEO</a><br>
+        <a href="{% url 'news:add_article' %}"> DODAJ NEWS </a>
+        <a href="{% url 'video:add_video' %}"> DODAJ VIDEO </a> <br>
 
 
+        <a href="{% url 'index' %}">HOME</a><br>
+
+        <a href="{% url 'news:articles_index' %}">INDEX NEWS</a>
+        <a href="{% url 'news:all_articles_list' %}">ALL NEWSY</a>
+        <a href="{% url 'news:trending' %}">POPULARNE NEWSY</a>
+        <a href="{% url 'news:promoted_articles' %}">PROMOWANE NEWSY</a>
+        <a href="{% url 'news:hot_promoted_articles' %}">POPULARNE PROMOWANE NEWSY</a><br>
+
+        <a href="{% url 'video:videos_index' %}">INDEX VIDEOS</a>
+        <a href="{% url 'video:all_videos_list' %}">VIDEO</a>
+        <a href="{% url 'video:trending' %}">POPULARNE VIDEO</a>
+        <a href="{% url 'video:promoted_videos' %}">PROMOWANE VIDEO</a>
+        <a href="{% url 'video:hot_promoted_videos' %}">POPULARNE PROMOWANE VIDEO</a><br>
 
 
-
-{% else %}
-
-    <a href="{% url "user:login" %}">ZALOGUJ</a>
-    <a href="{% url "user:register" %}">REJESTRUJ</a><br>
-
-    <a href="{% url 'index' %}">HOME</a><br>
-
-    <a href="{% url 'news:articles_index' %}">INDEX NEWS</a>
-    <a href="{% url 'news:all_articles_list' %}">ALL NEWS</a>
-    <a href="{% url 'news:trending' %}">POPULARNE NEWSY</a>
-    <a href="{% url 'news:promoted_articles' %}">PROMOWANE NEWSY</a>
-    <a href="{% url 'news:hot_promoted_articles' %}">POPULARNE PROMOWANE NEWSY</a><br>
+    {% else %}
 
 
-    <a href="{% url 'video:all_videos_list' %}">VIDEO</a>
-    <a href="{% url 'video:trending' %}">POPULARNE VIDEO</a>
-    <a href="{% url 'video:promoted_videos' %}">PROMOWANE VIDEO</a>
-    <a href="{% url 'video:hot_promoted_videos' %}">POPULARNE PROMOWANE VIDEO</a><br>
+        <a href="{% url "user:login" %}">ZALOGUJ</a>
+        <a href="{% url "user:register" %}">REJESTRUJ</a><br>
 
-{% endif %}
+        <a href="{% url 'index' %}">HOME</a><br>
 
-<br><br>
+        <a href="{% url 'news:articles_index' %}">INDEX NEWS</a>
+        <a href="{% url 'news:all_articles_list' %}">ALL NEWS</a>
+        <a href="{% url 'news:trending' %}">POPULARNE NEWSY</a>
+        <a href="{% url 'news:promoted_articles' %}">PROMOWANE NEWSY</a>
+        <a href="{% url 'news:hot_promoted_articles' %}">POPULARNE PROMOWANE NEWSY</a><br>
+
+
+        <a href="{% url 'video:all_videos_list' %}">VIDEO</a>
+        <a href="{% url 'video:trending' %}">POPULARNE VIDEO</a>
+        <a href="{% url 'video:promoted_videos' %}">PROMOWANE VIDEO</a>
+        <a href="{% url 'video:hot_promoted_videos' %}">POPULARNE PROMOWANE VIDEO</a><br>
+
+    {% endif %}
+
+

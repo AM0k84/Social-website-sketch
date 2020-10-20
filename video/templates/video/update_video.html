@@ -6,8 +6,8 @@
 
 {% block body %}
 
-    EDYTUJ {{ video.video_title }} <br><br>
-
+    <div class="page_title">EDYTUJ {{ video.video_title }} </div>
+<div class="container">
     {#W widoku nie używam mixina do sprawdzenia czy user, który usuwa newsa jest jego właścicielem#}
     {#więc muszę to zrobić tutaj.#}
     <div class="form">
@@ -32,5 +32,6 @@
     {% else %}
         NIE MOŻESZ EDYTOWA TEGO VIDEO!
     {% endif %}
+</div>
 </div>
 {% endblock %}

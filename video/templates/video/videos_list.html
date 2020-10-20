@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: WSZYSTKIE VIDEO {% endblock %}
 
 
 {% block body %}
 
-    WSZYSTKIE VIDEO <br> <br>
+    <div class="page_title">WSZYSTKIE VIDEO </div>
 
     {% include 'video/video_list_base.html' %}
 

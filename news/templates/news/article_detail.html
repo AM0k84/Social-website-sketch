@@ -12,9 +12,9 @@
 
     {#    ARTYKUŁ#}
 
-    PODGLĄD ARTYKUŁU <br><br>
+    <div class="page_title">SZCZEGÓŁY: {{ article.title | upper}}</div>
 
-
+<div class="container">
     {% if article.image %}
         <img src="{{ article.image.url }}">
     {% else %}
@@ -166,5 +166,5 @@
 
 
     <a href="{% url 'news:all_articles_list' %}"> &laquo; POWRÓT DO WSZYSTKICH NEWSÓW</a>
-
+</div>
 {% endblock %}

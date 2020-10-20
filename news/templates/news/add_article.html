@@ -7,31 +7,32 @@
 {% block title %}BEATSPOT: DODAJ NEWS{% endblock %}
 
 {% block body %}
+    <div class="page_title"> DODAJ NEWS</div>
 
-    DODAJ NEWS <br><br>
 
-    {##todo: wycentrować za pomocą css    #}
+    <div class="container">
+        {##todo: wycentrować za pomocą css    #}
 
-    <div class="form">
-        <form method="post" enctype='multipart/form-data'>
-            {% csrf_token %}
-            {{ form.media }}
-            {#        {%  crispy form %}#}
-            {#            {{ form|crispy }}#}
-            {{ form.title|as_crispy_field }}
-            {{ form.image|as_crispy_field }}
+        <div class="form">
+            <form method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form.media }}
+                {#        {%  crispy form %}#}
+                {#            {{ form|crispy }}#}
+                {{ form.title|as_crispy_field }}
+                {{ form.image|as_crispy_field }}
 
-            {{ form.category|as_crispy_field }}
-            {{ form.snippet|as_crispy_field }}
-            {{ form.body|as_crispy_field }}
+                {{ form.category|as_crispy_field }}
+                {{ form.snippet|as_crispy_field }}
+                {{ form.body|as_crispy_field }}
 
-            <p class="btnwrap">
-                <button type="submit" class="btn btn-outline-primary">DODAJ NEWS</button>
-            </p>
-        </form>
+                <p class="btnwrap">
+                    <button type="submit" class="btn btn-outline-primary">DODAJ NEWS</button>
+                </p>
+            </form>
 
+        </div>
     </div>
-
 
 
 {% endblock %}

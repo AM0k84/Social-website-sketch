@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: KATEGORIA {{ view.videocategory | upper }} {% endblock %}
 
 
 {% block body %}
 
-    {#LISTA ARTYKUŁÓW Z KONKRETNEJ KATEGORII#}
+    {#LISTA Video Z KONKRETNEJ KATEGORII#}
 
-    KATEOGORIA: {{ view.videocategory | upper }} <br> <br>
+    <div class="page_title">KATEOGORIA: {{ view.videocategory | upper }} </div>
 
     {% include 'video/video_list_base.html' %}
 

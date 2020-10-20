@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: OSTATNIO POPULARNE VIDEO {% endblock %}
 
 
 {% block body %}
 
-    OSTATNIO POPULARNE VIDEO <br><br>
+    <div class="page_title"> TRENDING VIDEO </div>
 
     {% include 'video/video_list_base.html' %}
 

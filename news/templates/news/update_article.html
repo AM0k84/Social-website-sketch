@@ -8,8 +8,8 @@
 
 {% block body %}
 
-    EDYTUJ {{ article.title }} <br><br>
-
+    <div class="page_title">EDYTUJ: {{ article.title }} </div>
+<div class="container">
     {#W widoku nie używam mixina do sprawdzenia czy user, który usuwa newsa jest jego właścicielem#}
     {#więc muszę to zrobić tutaj.#}
     {% if user.id == article.author.id %}
@@ -36,5 +36,6 @@
     {% else %}
         NIE MOŻESZ EDYTOWA TEGO NEWSA!
     {% endif %}
+</div>
 </div>
 {% endblock %}

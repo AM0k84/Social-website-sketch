@@ -9,7 +9,8 @@
 
 {% block body %}
 
-    ZALOGUJ <br><br>
+    <div class="page_title">ZALOGUJ </div>
+    <div class="container">
     <div class="form">
         <form action="" method="post">
             {% csrf_token %}
@@ -25,5 +26,6 @@
                 <button type="submit" class="btn btn-outline-primary">ZALOGUJ</button>
             </p>
         </form>
-    </div>>
+    </div>
+    </div>
 {% endblock %}

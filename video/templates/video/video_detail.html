@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 {% load embed_video_tags %}
 {% load hitcount_tags %}
 
@@ -10,9 +11,9 @@
 
 {% block body %}
 
-    PODGLĄD VIDEO <br> <br>
+    <div class="page_title">SZCZEGÓŁY: {{ video.video_title | upper}} </div>
 
-
+<div class="container">
     {% video video.youtube_video 'large' %} <br>
 
     {#ID_video: {{ video.id }} <br>#}
@@ -163,7 +164,7 @@
 
     {#PAGINACJA#}
 
-
+</div>
 
 
 

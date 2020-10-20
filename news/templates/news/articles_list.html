@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
-{% block css %}<link rel="stylesheet" type="text/css" href="{% static '' %}">{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/news/style.css' %}">{% endblock %}
 {% load hitcount_tags %}
 
 
@@ -14,7 +14,7 @@
 {% block body %}
 
 
-    WSZYSTKIE DODANE ARTYKUŁY <br><br>
+    <div class="page_title"> WSZYSTKIE DODANE NEWSY </div>
 
     {% include 'news/article_list_base.html' %}
 

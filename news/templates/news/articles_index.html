@@ -13,7 +13,9 @@
 
     {#LISTA WSZYSTKICH ARTYKUŁÓW#}
 
-    STRONA GŁÓWNA NEWSÓW <br><br>
+    <div class="page_title">NEWS | STRONA GŁÓWNA</div>
+
+    <div class="container">
 {##todo: do zmiany ale mniej więcej tak:#}
     <div class="row">
   <div class="col-md-4">{% for articles in last_hot_articles %}
@@ -62,7 +64,7 @@ OSTATNIO DODANE (wszystkie newsy)<br>
             <a href="?page={{ page_obj.next_page_number }}"> NASTĘPNA &raquo;</a>
         {% endif %}
     {% endif %}
-
+</div>
 {% endblock %}
 
 

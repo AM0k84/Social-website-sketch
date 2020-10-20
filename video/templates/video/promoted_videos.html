@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load embed_video_tags %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 
 {% block title %} BEATSPOT: PROMOWANE VIDEO {% endblock %}
 
 
 {% block body %}
 
-    WSZYSTKIE PROMOWANE VIDEO <br> <br>
+    <div class="page_title">WSZYSTKIE PROMOWANE VIDEO </div>
 
     {% include 'video/video_list_base.html' %}
 

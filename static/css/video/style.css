@@ -1,3 +1,20 @@
+.page_title{
+    font-size: 40px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    background-color: black;
+    width: 100%;
+
+}
+
+.container {
+   padding: 25px;
+}
+
+
+/*FORMULARZE W VIDEO*/
+
 div.form {
     display: block;
     text-align: center;
@@ -9,10 +26,11 @@ form {
     margin-right: auto;
     text-align: left;
     width: 70%;
+
 }
 
 .btnwrap {
-  text-align: center;
+    text-align: center;
 }
 
 button {

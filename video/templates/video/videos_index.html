@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/video/style.css' %}">{% endblock %}
 {% load hitcount_tags %}
 
 {% block title %} BEATSPOT: STRONA  GŁÓWNA VIDEO {% endblock %}
@@ -7,11 +8,10 @@
 
 {% block body %}
 
-    {#LISTA WSZYSTKICH ARTYKUŁÓW#}
 
-    STRONA GŁÓWNA VIDEO <br><br>
+    <div class="page_title">VIDEO | STRONA GŁÓWNA </div>
 
-
+<div class="container">
 MEGA HOT TRENDING PROMOWANE:<br>
 {% for videos in last_hot_videos %}
     {{ videos.video_title }}<br>
@@ -49,7 +49,7 @@ OSTATNIO DODANE (wszystkie video)<br>
             <a href="?page={{ page_obj.next_page_number }}"> NASTĘPNA &raquo;</a>
         {% endif %}
     {% endif %}
-
+</div>
 {% endblock %}
 
 
